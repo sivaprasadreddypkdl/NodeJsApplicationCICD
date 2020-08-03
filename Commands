@@ -1,0 +1,15 @@
+docker stop  0965f1358443 fff676242e60 4c180b56dac3 2f5c77d9f5b3 f1b6673a70f1 8a45a5df6a72
+docker rmi 4cf63bc2ecaf 
+
+docker build -t sivarepo/nodeweb:latest .
+
+docker run -p 8081:8081 -itd  sivarepo/nodeweb:latest
+
+
+docker build -t sivarepo/nodeapp:latest .
+
+docker run -p 8080:8080 -itd  sivarepo/nodeapp:latest
+
+docker build -t sivarepo/nodedb:latest .
+
+docker run -itd --name mysql  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password sivarepo/nodedb:latest
