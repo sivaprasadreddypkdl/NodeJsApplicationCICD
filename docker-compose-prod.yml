@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  webservice:
+   build:
+    context: ./frontend
+    dockerfile: Dockerfile_prod 
+   image: web_image_prod
+   tty: true
+   container_name: web_container_prod
+   ports:
+    - 8081:8081
+   links: 
+    - "authservice:authservice"
+    - "mysqldb:mysqldb"
+   depends_on:
+    - authservice
+    - mysqldb
+  authservice:
+   build:
+    context: ./authservice
+    dockerfile: Dockerfile_prod
+   image: auth_image_prod
+   container_name: auth_container_prod
+   links:
+    - "mysqldb:mysqldb"
+   depends_on:
+    - mysqldb
+  mysqldb:
+   image: mysql:5.7
+   environment:
+    - MYSQL_ROOT_PASSWORD=password
+   container_name: mysql

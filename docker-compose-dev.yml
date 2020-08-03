@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  webservice:
+   build:
+    context: ./frontend
+    dockerfile: Dockerfile_dev 
+   image: web_image_dev
+   tty: true
+   container_name: web_container_dev
+   ports:
+    - 8081:8081
+  authservice:
+   build:
+    context: ./authservice
+    dockerfile: Dockerfile_dev
+   image: auth_image_dev
+   container_name: auth_container_dev
+   ports:
+    - 8080:8080
+   network_mode: host
+  mysqldb:
+   image: mysql:5.7
+   environment:
+    - MYSQL_ROOT_PASSWORD=password
+   container_name: mysql
+   ports:
+    - 3306:3306

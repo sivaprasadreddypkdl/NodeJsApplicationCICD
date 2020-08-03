@@ -1,0 +1,9 @@
+FROM node:latest
+RUN apt-get install -y git
+WORKDIR "/root"
+RUN git clone https://github.com/DIYDevOps/Sample_react_microservice.git
+WORKDIR "/root/Sample_react_microservice/frontend/web"
+EXPOSE 8081
+RUN npm install
+ENTRYPOINT ["npm", "start"]
+

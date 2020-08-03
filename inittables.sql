@@ -1,4 +1,7 @@
+DROP SCHEMA IF EXISTS auth;
 CREATE DATABASE `auth` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+connect auth;
 
 CREATE TABLE `user` (
   `username` varchar(16) NOT NULL,
